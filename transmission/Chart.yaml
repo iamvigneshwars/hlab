@@ -1,0 +1,7 @@
+
+apiVersion: v2
+name: transmission
+description: A lightweight BitTorrent client
+type: application
+
+version: 0.0.1
