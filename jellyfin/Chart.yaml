@@ -1,0 +1,6 @@
+apiVersion: v2
+name: jellyfin
+description: An opensource media server
+type: application
+
+version: 0.0.1
