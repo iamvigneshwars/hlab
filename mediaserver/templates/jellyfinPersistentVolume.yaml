@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume 
 metadata:
-  name: jellyfin
+  name: media
 spec:
   capacity:
     storage: 10Gi 
