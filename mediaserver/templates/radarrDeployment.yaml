@@ -27,12 +27,17 @@ spec:
           volumeMounts:
           - name: downloads
             mountPath: /downloads
-          - name: movies
-            mountPath: /movies
+          - name: media
+            mountPath: /media
+          - name: config
+            mountPath: /config
       volumes: 
       - name: downloads
         persistentVolumeClaim:
           claimName: transmission-downloads
-      - name: movies 
+      - name: media 
         persistentVolumeClaim:
           claimName: media
+      - name: config
+        persistentVolumeClaim:
+          claimName: radarr-config
