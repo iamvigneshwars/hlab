@@ -10,6 +10,6 @@ spec:
   persistentVolumeReclaimPolicy: Retain 
   storageClassName: manual 
   nfs:
-    path: /export/Data 
-    server: 192.168.1.44
+    path: /mnt/nvmestore
+    server: 192.168.1.47
     readOnly: false 

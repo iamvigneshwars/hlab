@@ -10,8 +10,8 @@ spec:
   persistentVolumeReclaimPolicy: Retain 
   storageClassName: manual 
   nfs:
-    path: /export/Data/Downloads/Transmission
-    server: 192.168.1.44
+    path: /mnt/data/Downloads/Transmission
+    server: 192.168.1.47
     readOnly: false 
 
 ---
