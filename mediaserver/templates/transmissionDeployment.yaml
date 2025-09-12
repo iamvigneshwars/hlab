@@ -14,6 +14,8 @@ spec:
       labels:
         app: transmission
     spec:
+      nodeSelector:
+        mediaserver: "true"
       containers:
         - name: transmission 
           image: linuxserver/transmission:latest 
