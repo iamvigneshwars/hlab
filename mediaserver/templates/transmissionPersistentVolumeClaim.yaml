@@ -8,13 +8,29 @@ spec:
   accessModes:
     - ReadWriteMany 
   persistentVolumeReclaimPolicy: Retain 
-  storageClassName: manual 
-  nfs:
+  storageClassName: local-storage 
+  hostPath:
     path: /mnt/data/Downloads/Transmission
+
+---
+
+apiVersion: v1
+kind: PersistentVolume 
+metadata:
+  name: transmission-config
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain 
+  storageClassName: manual
+  nfs:
+    path: /mnt/nvmestore/kube-configs
     server: 192.168.1.47
     readOnly: false 
 
----
+--- 
 
 apiVersion: v1
 kind: PersistentVolumeClaim 
@@ -23,8 +39,24 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: manual
+  storageClassName: local-storage
   volumeName: transmission-downloads
   resources:
     requests:
       storage: 10Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: transmission-config
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: manual
+  volumeName: transmission-config
+  resources:
+    requests:
+      storage: 1Gi
+
