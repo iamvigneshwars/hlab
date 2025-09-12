@@ -1,16 +1,38 @@
 apiVersion: networking.k8s.io/v1
-kind: Ingress 
+kind: Ingress
 metadata:
   name: jellyfin
 spec:
+  ingressClassName: nginx
   rules:
   - host: jellyfin.lan
     http:
       paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: jellyfin
-              port:
-                number: 8096
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: jellyfin
+            port:
+              number: 8096
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: jellyfin
+#   namespace: mediaserver
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: /$1
+#     nginx.ingress.kubernetes.io/use-regex: "true"
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#   - host: jellyfin.lan
+#     http:
+#       paths:
+#       - path: /(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: jellyfin
+#             port:
+#               number: 8096

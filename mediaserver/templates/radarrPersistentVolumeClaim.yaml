@@ -8,9 +8,11 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage
-  hostPath:
-    path: /kubeconf/radarr
+  storageClassName: manual
+  nfs:
+    path: /mnt/nvmestore/kube-configs
+    server: 192.168.1.47
+    readOnly: false 
 
 --- 
 
@@ -21,7 +23,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: local-storage
+  storageClassName: manual
   volumeName: radarr-config
   resources:
     requests:
