@@ -32,6 +32,8 @@ spec:
               mountPath: /downloads 
             - name: config
               mountPath: /config
+          resources:
+            {{- toYaml .Values.transmission.resources | nindent 12 }}
       volumes:
       - name: downloads
         persistentVolumeClaim:
