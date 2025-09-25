@@ -11,7 +11,7 @@ spec:
   storageClassName: manual
   nfs:
     path: /mnt/nvmestore/kube-configs
-    server: 192.168.1.47
+    server: 192.168.1.2
     readOnly: false 
 
 --- 

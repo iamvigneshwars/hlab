@@ -8,9 +8,11 @@ spec:
   accessModes:
     - ReadWriteMany 
   persistentVolumeReclaimPolicy: Retain 
-  storageClassName: local-storage 
-  hostPath:
+  storageClassName: manual
+  nfs:
     path: /mnt/data/Downloads/Transmission
+    server: 192.168.1.2
+    readOnly: false
 
 ---
 
@@ -27,7 +29,7 @@ spec:
   storageClassName: manual
   nfs:
     path: /mnt/nvmestore/kube-configs
-    server: 192.168.1.47
+    server: 192.168.1.2
     readOnly: false 
 
 --- 
@@ -39,7 +41,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: local-storage
+  storageClassName: manual
   volumeName: transmission-downloads
   resources:
     requests:
