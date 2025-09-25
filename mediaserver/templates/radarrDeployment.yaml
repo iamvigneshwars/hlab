@@ -14,8 +14,6 @@ spec:
       labels:
         app: radarr 
     spec:
-      nodeSelector:
-        mediaserver: "true"
       containers:
         - name: radarr
           image: linuxserver/radarr:latest

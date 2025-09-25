@@ -14,8 +14,6 @@ spec:
       labels:
         app: jellyfin 
     spec:
-      nodeSelector:
-        mediaserver: "true"
       containers:
         - name: jellyfin 
           image: jellyfin/jellyfin:latest 
