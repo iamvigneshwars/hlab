@@ -1,27 +1,87 @@
-prometheus:
-  image: prom/prometheus:v2.54.1
-  resources:
-    requests:
-      cpu: 100m
-      memory: 200Mi
-    limits:
-      cpu: 500m
-      memory: 512Mi
+kube-prometheus-stack:
+  alertmanager:
+    enabled: false
 
-grafana:
-  image: grafana/grafana:10.4.0
-  adminUser: admin
-  adminPassword: admin123
-  resources:
-    requests:
-      cpu: 100m
-      memory: 200Mi
-    limits:
-      cpu: 500m
-      memory: 512Mi
+  grafana:
+    enabled: true
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      hosts:
+        - grafana.lan
+      path: /
+      pathType: Prefix
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+    adminPassword: admin
 
-ingress:
-  enabled: true
-  prometheusHost: prometheus.lan
-  grafanaHost: grafana.lan
+  prometheus:
+    enabled: true
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      hosts:
+        - prometheus.lan
+      path: /
+      pathType: Prefix
+    prometheusSpec:
+      resources:
+        requests:
+          cpu: 200m
+          memory: 400Mi
+        limits:
+          cpu: 500m
+          memory: 1Gi
+      retention: 7d
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 10Gi
 
+  prometheus-node-exporter:
+    enabled: true
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        cpu: 200m
+        memory: 200Mi
+
+  kube-state-metrics:
+    enabled: true
+    resources:
+      requests:
+        cpu: 100m
+        memory: 250Mi
+      limits:
+        cpu: 200m
+        memory: 500Mi
+
+  prometheusOperator:
+    enabled: true
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        cpu: 200m
+        memory: 200Mi
+
+  coreDns:
+    enabled: false
+
+  defaultRules:
+    rules:
+      kubernetes: true
+  prometheusOperator:
+    admissionWebhooks:
+      enabled: false
