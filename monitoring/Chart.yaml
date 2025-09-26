@@ -1,0 +1,4 @@
+apiVersion: v2
+name: monitoring 
+description: A monitoring stack with prometheus and grafana
+version: 0.1.0

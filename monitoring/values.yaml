@@ -1,0 +1,14 @@
+prometheus:
+  image: prom/prometheus:v2.54.1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 200Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+ingress:
+  enabled: true
+  prometheusHost: prometheus.lan
+
