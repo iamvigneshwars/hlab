@@ -8,7 +8,20 @@ prometheus:
       cpu: 500m
       memory: 512Mi
 
+grafana:
+  image: grafana/grafana:10.4.0
+  adminUser: admin
+  adminPassword: admin123
+  resources:
+    requests:
+      cpu: 100m
+      memory: 200Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
 ingress:
   enabled: true
   prometheusHost: prometheus.lan
+  grafanaHost: grafana.lan
 
