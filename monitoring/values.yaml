@@ -18,6 +18,12 @@ kube-prometheus-stack:
       limits:
         cpu: 200m
         memory: 256Mi
+    persistence:
+      enabled: true
+      storageClassName: nfs-grafana
+      accessModes:
+        - ReadWriteOnce
+      size: 5Gi
     adminPassword: admin
 
   prometheus:
@@ -30,6 +36,14 @@ kube-prometheus-stack:
       path: /
       pathType: Prefix
     prometheusSpec:
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: nfs-prometheus
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 10Gi
       resources:
         requests:
           cpu: 200m
@@ -38,13 +52,6 @@ kube-prometheus-stack:
           cpu: 500m
           memory: 1Gi
       retention: 7d
-      storageSpec:
-        volumeClaimTemplate:
-          spec:
-            accessModes: ["ReadWriteOnce"]
-            resources:
-              requests:
-                storage: 10Gi
 
   prometheus-node-exporter:
     enabled: true
