@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: arm-exporter
+  namespace: monitoring
+  labels:
+    app: arm-exporter
+spec:
+  selector:
+    matchLabels:
+      app: arm-exporter
+  template:
+    metadata:
+      labels:
+        app: arm-exporter
+    spec:
+      hostPID: true
+      containers:
+        - name: arm-exporter
+          image: carlosedp/arm_exporter:latest
+          ports:
+            - name: metrics
+              containerPort: 9243
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: sys
+              mountPath: /sys
+              readOnly: true
+          terminationMessagePath: /tmp/termination-log
+      volumes:
+        - name: sys
+          hostPath:
+            path: /sys
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: arm-exporter
+  namespace: monitoring
+  labels:
+    app: arm-exporter
+spec:
+  ports:
+    - name: metrics
+      port: 9243
+      targetPort: metrics
+  selector:
+    app: arm-exporter
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: arm-exporter
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: arm-exporter
+  endpoints:
+    - port: metrics
+      interval: 30s
