@@ -10,10 +10,10 @@ transmission:
 jellyfin:
   resources:
     limits:
-      cpu: "1500m"
+      cpu: "2000m"
       memory: "1Gi"
     requests:
-      cpu: "500m"
+      cpu: "1500m"
       memory: "512Mi"
 
 radarr:

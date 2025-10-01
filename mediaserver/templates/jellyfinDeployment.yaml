@@ -25,7 +25,7 @@ spec:
             - name: config
               mountPath: /config
           resources:
-            {{- toYaml .Values.transmission.resources | nindent 12 }}
+            {{- toYaml .Values.jellyfin.resources | nindent 12 }}
       volumes:
         - name: media
           persistentVolumeClaim:

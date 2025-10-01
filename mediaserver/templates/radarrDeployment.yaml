@@ -32,7 +32,7 @@ spec:
           - name: config
             mountPath: /config
           resources:
-            {{- toYaml .Values.transmission.resources | nindent 12 }}
+            {{- toYaml .Values.radarr.resources | nindent 12 }}
       volumes: 
       - name: downloads
         persistentVolumeClaim:
