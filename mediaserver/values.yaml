@@ -1,4 +1,5 @@
 transmission:
+  nodeName: "rpi2"
   resources:
     limits:
       cpu: "500m"
@@ -8,6 +9,7 @@ transmission:
       memory: "256Mi"
 
 jellyfin:
+  nodeName: "rpi2"
   resources:
     limits:
       cpu: "2000m"
@@ -17,6 +19,7 @@ jellyfin:
       memory: "512Mi"
 
 radarr:
+  nodeName: "rpi2"
   resources:
     requests:
       cpu: "200m"

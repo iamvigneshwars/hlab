@@ -4,4 +4,4 @@ name: mediaserver
 description: A media server 
 type: application
 
-version: 0.0.1
+version: 0.1.0

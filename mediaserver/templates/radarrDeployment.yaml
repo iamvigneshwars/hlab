@@ -14,6 +14,7 @@ spec:
       labels:
         app: radarr 
     spec:
+      nodeName: {{ .Values.radarr.nodeName }}
       containers:
         - name: radarr
           image: linuxserver/radarr:latest
