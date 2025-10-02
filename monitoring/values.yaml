@@ -25,6 +25,15 @@ kube-prometheus-stack:
         - ReadWriteOnce
       size: 5Gi
     adminPassword: admin
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - rpi1
 
   prometheus:
     enabled: true
@@ -51,8 +60,6 @@ kube-prometheus-stack:
         limits:
           cpu: 500m
           memory: 1Gi
-      retention: 7d
-
   prometheus-node-exporter:
     enabled: true
     prometheus:
@@ -70,6 +77,16 @@ kube-prometheus-stack:
       limits:
         cpu: 200m
         memory: 200Mi
+      retention: 3d
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - rpi1
 
   kube-state-metrics:
     enabled: true
@@ -80,6 +97,15 @@ kube-prometheus-stack:
       limits:
         cpu: 200m
         memory: 500Mi
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - rpi1
 
   prometheusOperator:
     enabled: true
@@ -90,13 +116,12 @@ kube-prometheus-stack:
       limits:
         cpu: 200m
         memory: 200Mi
-
-  coreDns:
-    enabled: false
-
-  defaultRules:
-    rules:
-      kubernetes: true
-  prometheusOperator:
-    admissionWebhooks:
-      enabled: false
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - rpi1
