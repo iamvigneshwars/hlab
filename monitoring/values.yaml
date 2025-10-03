@@ -60,23 +60,6 @@ kube-prometheus-stack:
         limits:
           cpu: 500m
           memory: 1Gi
-  prometheus-node-exporter:
-    enabled: true
-    prometheus:
-      monitor:
-        attachMetadata:
-          node: true
-        relabelings:
-          - sourceLabels: [__meta_kubernetes_pod_node_name]
-            targetLabel: node
-        metricRelabelings: []
-    resources:
-      requests:
-        cpu: 100m
-        memory: 100Mi
-      limits:
-        cpu: 200m
-        memory: 200Mi
       retention: 3d
       affinity:
         nodeAffinity:
@@ -125,3 +108,21 @@ kube-prometheus-stack:
                   operator: In
                   values:
                     - rpi1
+
+  prometheus-node-exporter:
+    enabled: true
+    prometheus:
+      monitor:
+        attachMetadata:
+          node: true
+        relabelings:
+          - sourceLabels: [__meta_kubernetes_pod_node_name]
+            targetLabel: node
+        metricRelabelings: []
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        cpu: 200m
+        memory: 200Mi
