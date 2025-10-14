@@ -13,10 +13,10 @@ jellyfin:
   resources:
     limits:
       cpu: "2000m"
-      memory: "1Gi"
+      memory: "2Gi"
     requests:
       cpu: "1500m"
-      memory: "512Mi"
+      memory: "1Gi"
 
 radarr:
   nodeName: "rpi2"
