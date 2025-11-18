@@ -1,0 +1,75 @@
+argo-cd:
+  redis-ha:
+    enabled: false
+  redis:
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+
+  controller:
+    replicas: 1
+    resources:
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
+
+  server:
+    replicas: 1
+    autoscaling:
+      enabled: false
+    resources:
+      limits:
+        cpu: 200m
+        memory: 256Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+
+  repoServer:
+    replicas: 1
+    resources:
+      limits:
+        cpu: 200m
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 256Mi
+
+  applicationSet:
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+
+  notifications:
+    enabled: false
+  dex:
+    enabled: false
+  crds:
+    install: false
+
+  server:
+    insecure: true
+    ingress:
+      enabled: true
+      hostname: argocd.lan
+      path: /
+      pathType: Prefix
+      ingressClassName: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/ssl-redirect: "false"
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+
+    extraArgs:
+      - --insecure
