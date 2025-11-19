@@ -1,0 +1,25 @@
+postgresql:
+  global:
+    postgresql:
+      auth:
+        postgresPassword: "admin"
+        database: "db"
+  primary:
+    nodeSelector:
+      kubernetes.io/hostname: rpi2
+    persistence:
+      enabled: true
+      existingClaim: "postgres"
+      mountPath: /bitnami/postgresql
+    resources:
+      requests:
+        cpu: 1
+        memory: 512Mi
+      limits:
+        memory: 1Gi
+    service:
+      type: NodePort
+      nodePorts:
+        postgresql: "30432"
+  volumePermissions:
+    enabled: true
