@@ -1,0 +1,74 @@
+keycloak:
+  image:
+    repository: quay.io/keycloak/keycloak
+    tag: "26.4.0"
+  #
+  command:
+    - "/opt/keycloak/bin/kc.sh"
+    - "start"
+  #
+  service:
+    type: ClusterIP
+  #
+  ingress:
+    enabled: true
+    servicePort: http
+    ingressClassName: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    rules:
+    - host: keycloak.lan
+      paths:
+      - path: /
+        pathType: Prefix
+
+  postgresql:
+    enabled: false
+
+  extraEnv: |
+    - name: KC_HOSTNAME
+      value: "keycloak.lan"
+    - name: KC_PROXY_HEADERS
+      value: "xforwarded"
+    - name: KC_HTTP_ENABLED
+      value: "true"
+    - name: KEYCLOAK_ADMIN
+      value: "admin"
+    - name: KEYCLOAK_ADMIN_PASSWORD
+      value: "admin"
+    - name: KC_DB
+      value: "postgres"
+    - name: KC_DB_URL
+      value: "jdbc:postgresql://postgres.lan:30432/keycloak"
+    - name: KC_DB_USERNAME
+      value: "keycloak"
+    - name: KC_DB_PASSWORD
+      value: "keycloakpassword"
+    - name: KC_HTTP_MANAGEMENT_HEALTH_ENABLED
+      value: "false"
+    - name: KC_HEALTH_ENABLED
+      value: "true"
+
+  livenessProbe: |
+    httpGet:
+      path: /health/live
+      port: http
+    initialDelaySeconds: 30
+    timeoutSeconds: 5
+
+  readinessProbe: |
+    httpGet:
+      path: /health/ready
+      port: http
+    initialDelaySeconds: 30
+    timeoutSeconds: 1
+
+  startupProbe: |
+    httpGet:
+      path: /health/started
+      port: http
+    initialDelaySeconds: 30
+    failureThreshold: 60
+    periodSeconds: 5
