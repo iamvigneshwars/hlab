@@ -27,6 +27,17 @@ keycloak:
   postgresql:
     enabled: false
 
+  resources:
+    requests:
+      cpu: 1
+      memory: 750Mi
+    limits:
+      cpu: 1500m
+      memory: 750Mi
+
+  nodeSelector:
+    kubernetes.io/hostname: rpi1
+
   extraEnv: |
     - name: KC_HOSTNAME
       value: "keycloak.lan"
@@ -45,7 +56,7 @@ keycloak:
     - name: KC_DB_USERNAME
       value: "keycloak"
     - name: KC_DB_PASSWORD
-      value: "keycloakpassword"
+      value: "keycloak"
     - name: KC_HTTP_MANAGEMENT_HEALTH_ENABLED
       value: "false"
     - name: KC_HEALTH_ENABLED
