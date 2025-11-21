@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: postgres
+  name: pgadmin
 spec:
   capacity:
     storage: 10Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: manual-postgres
+  storageClassName: manual-pgadmin
   local:
-    path: /srv/data/k8s/postgres
+    path: /srv/nvme/k8s/pgadmin
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -19,18 +19,17 @@ spec:
             operator: In
             values:
               - rpi2
-
 ---
-
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgres
+  name: pgadmin
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: manual-postgres
-  volumeName: postgres
+  storageClassName: manual-pgadmin
+  volumeName: pgadmin
   resources:
     requests:
       storage: 10Gi
+

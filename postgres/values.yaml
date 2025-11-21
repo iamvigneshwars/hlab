@@ -3,23 +3,51 @@ postgresql:
     postgresql:
       auth:
         postgresPassword: "admin"
-        database: "db"
   primary:
     nodeSelector:
-      kubernetes.io/hostname: rpi2
+      kubernetes.io/hostname: rpi1
     persistence:
       enabled: true
       existingClaim: "postgres"
       mountPath: /bitnami/postgresql
     resources:
       requests:
-        cpu: 1
+        cpu: 500m
         memory: 512Mi
       limits:
+        cpu: 1
         memory: 1Gi
     service:
       type: NodePort
       nodePorts:
         postgresql: "30432"
+  volumePermissions:
+    enabled: true
+
+pgadmin4:
+  env:
+    email: "admin@admin.com"
+    password: "admin"
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    hosts:
+      - host: pgadmin.lan
+        paths:
+          - path: /
+            pathType: Prefix
+  nodeSelector:
+    kubernetes.io/hostname: rpi1
+  persistence:
+    enabled: true
+    existingClaim: "pgadmin"
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      memory: 512Mi
   volumePermissions:
     enabled: true
