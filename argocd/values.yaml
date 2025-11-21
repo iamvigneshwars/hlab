@@ -1,4 +1,32 @@
 argo-cd:
+  configs:
+    cm:
+      url: http://argocd.lan
+      oidc.config: |
+        name: Keycloak
+        issuer: http://keycloak.lan/realms/homelab
+        clientID: argocd
+        clientSecret: lFZ0WxB1e3QlLsn6oeaYP51tXi92F39y
+        usernameClaim: email
+        requestedScopes:
+          - openid
+          - email
+          - profile
+    rbac:
+      create: true
+      policy.default: role:readonly
+      scopes: "[email]"
+      policy.csv: |
+        p, role:admin, applications, *, */*, allow
+        p, role:admin, clusters, *, *, allow
+        p, role:admin, repositories, *, *, allow
+        p, role:admin, projects, *, *, allow
+        p, role:admin, exec, create, */*, allow
+        p, role:admin, logs, get, */*, allow
+        p, role:admin, settings, *, *, allow
+        g, admin, role:admin
+        g, viki@admin.com, role:admin
+
   redis-ha:
     enabled: false
   redis:
