@@ -1,7 +1,7 @@
 transmission:
   resources:
     requests:
-      cpu: "200m"
+      cpu: "100m"
       memory: "256Mi"
     limits:
       cpu: "200m"
@@ -10,17 +10,8 @@ transmission:
 jellyfin:
   resources:
     limits:
-      cpu: "3000m"
-      memory: "3000Mi"
+      cpu: "2500m"
+      memory: "2000Mi"
     requests:
       cpu: "3000m"
       memory: "3000Mi"
-
-radarr:
-  resources:
-    requests:
-      cpu: "100"
-      memory: "256Mi"
-    limits:
-      cpu: "100"
-      memory: "512Mi"
