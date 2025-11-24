@@ -14,7 +14,11 @@ spec:
       labels:
         app: radarr 
     spec:
-      nodeName: {{ .Values.radarr.nodeName }}
+      tolerations:
+        - key: "mediaserver"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
       containers:
         - name: radarr
           image: linuxserver/radarr:latest

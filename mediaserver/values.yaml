@@ -1,29 +1,26 @@
 transmission:
-  nodeName: "rpi2"
-  resources:
-    limits:
-      cpu: "500m"
-      memory: "512Mi"
-    requests:
-      cpu: "250m"
-      memory: "256Mi"
-
-jellyfin:
-  nodeName: "rpi2"
-  resources:
-    limits:
-      cpu: "2000m"
-      memory: "2Gi"
-    requests:
-      cpu: "1500m"
-      memory: "1Gi"
-
-radarr:
-  nodeName: "rpi2"
   resources:
     requests:
       cpu: "200m"
       memory: "256Mi"
     limits:
-      cpu: "1000m"
-      memory: "1Gi"
+      cpu: "200m"
+      memory: "512Mi"
+
+jellyfin:
+  resources:
+    limits:
+      cpu: "3000m"
+      memory: "3000Mi"
+    requests:
+      cpu: "3000m"
+      memory: "3000Mi"
+
+radarr:
+  resources:
+    requests:
+      cpu: "100"
+      memory: "256Mi"
+    limits:
+      cpu: "100"
+      memory: "512Mi"

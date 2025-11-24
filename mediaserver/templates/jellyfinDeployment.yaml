@@ -14,7 +14,11 @@ spec:
       labels:
         app: jellyfin 
     spec:
-      nodeName: {{ .Values.jellyfin.nodeName }}
+      tolerations:
+        - key: "mediaserver"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
       containers:
         - name: jellyfin 
           image: jellyfin/jellyfin:latest 

@@ -14,7 +14,11 @@ spec:
       labels:
         app: transmission
     spec:
-      nodeName: {{ .Values.transmission.nodeName }}
+      tolerations:
+        - key: "mediaserver"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
       containers:
         - name: transmission 
           image: linuxserver/transmission:latest 
