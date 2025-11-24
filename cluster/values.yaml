@@ -1,0 +1,11 @@
+monitoring:
+  extraValuesFiles: []
+  valuesObject: {}
+
+keycloak:
+  extraValuesFiles: []
+  valuesObject: {}
+
+postgres:
+  extraValuesFiles: []
+  valuesObject: {}

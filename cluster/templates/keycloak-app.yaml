@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  namespace: keycloak
+spec:
+  project: default
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: keycloak
+  source:
+    repoURL: 'https://github.com/iamvigneshwars/hlab'
+    path: keycloak
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+        {{- if .Values.keycloak.extraValueFiles }}
+        {{- .Values.keycloak.extraValueFiles | toYaml | nindent 8 }}
+        {{- end }}
+      {{- if .Values.keycloak.valuesObject }}
+      valuesObject:
+        {{- .Values.keycloak.valuesObject | toYaml | nindent 8 }}
+      {{- end }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
