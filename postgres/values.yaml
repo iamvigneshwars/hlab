@@ -40,7 +40,7 @@ pgadmin4:
             pathType: Prefix
   nodeSelector:
     kubernetes.io/hostname: rpi1
-  persistence:
+  persistentVolume:
     enabled: true
     existingClaim: "pgadmin"
   resources:
