@@ -9,9 +9,9 @@ transmission:
 
 jellyfin:
   resources:
-    limits:
-      cpu: "2500m"
-      memory: "2000Mi"
     requests:
-      cpu: "3000m"
+      cpu: "2000m"
+      memory: "2000Mi"
+    limits:
+      cpu: "3500m"
       memory: "3000Mi"
