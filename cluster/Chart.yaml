@@ -1,5 +1,0 @@
-apiVersion: v2
-name: custer 
-description: All the setup for a kubernetes cluster
-type: application
-version: 0.1.0
