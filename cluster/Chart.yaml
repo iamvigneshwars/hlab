@@ -1,0 +1,5 @@
+apiVersion: v2
+name: cluster 
+description: collection of cluster apps
+type: application
+version: 0.1.0
