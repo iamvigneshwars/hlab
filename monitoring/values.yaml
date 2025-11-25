@@ -33,7 +33,7 @@ kube-prometheus-stack:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - rpi1
+                    - rpi2
 
   prometheus:
     enabled: true
@@ -69,16 +69,16 @@ kube-prometheus-stack:
                   - key: kubernetes.io/hostname
                     operator: In
                     values:
-                      - rpi1
+                      - rpi2
 
   kube-state-metrics:
     enabled: true
     resources:
       requests:
-        cpu: 100m
+        cpu: 50m
         memory: 250Mi
       limits:
-        cpu: 200m
+        cpu: 100m
         memory: 500Mi
     affinity:
       nodeAffinity:
@@ -88,7 +88,7 @@ kube-prometheus-stack:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - rpi1
+                    - rpi2
 
   prometheusOperator:
     enabled: true
@@ -107,7 +107,7 @@ kube-prometheus-stack:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - rpi1
+                    - rpi2
 
   prometheus-node-exporter:
     enabled: true
@@ -121,8 +121,8 @@ kube-prometheus-stack:
         metricRelabelings: []
     resources:
       requests:
-        cpu: 100m
+        cpu: 50m
         memory: 100Mi
       limits:
-        cpu: 200m
+        cpu: 100m
         memory: 200Mi
