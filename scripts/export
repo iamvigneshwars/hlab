@@ -1,0 +1,2 @@
+/srv/nvme *(rw,sync,no_subtree_check,all_squash,anonuid=65534,anongid=2000)
+/srv/data *(rw,sync,no_subtree_check,all_squash,anonuid=65534,anongid=2000)
