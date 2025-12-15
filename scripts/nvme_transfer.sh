@@ -46,3 +46,6 @@ umount /mnt/boot
 rpi-eeprom-update -a
 
 echo "Setup complete. Power off, remove SD card, and reboot to boot from NVMe."
+
+# TUrn off swap
+systemctl mask swap.target
