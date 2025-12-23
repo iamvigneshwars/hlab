@@ -14,6 +14,15 @@ spec:
       labels:
         app: jellyfin 
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: mediaserver
+                    operator: In
+                    values:
+                      - "true"
       tolerations:
         - key: "mediaserver"
           operator: "Equal"

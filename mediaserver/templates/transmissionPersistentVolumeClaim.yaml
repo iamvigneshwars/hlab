@@ -8,17 +8,20 @@ spec:
   accessModes:
     - ReadWriteMany 
   persistentVolumeReclaimPolicy: Retain 
-  storageClassName: local-storage
-  local:
-    path: /srv/data
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-          - key: kubernetes.io/hostname
-            operator: In
-            values:
-              - rpi2
+  storageClassName: nfs-data
+  nfs:
+    server: 192.168.1.252
+    path: "/srv/nfs/data"
+  # local:
+  #   path: /srv/data
+  # nodeAffinity:
+  #   required:
+  #     nodeSelectorTerms:
+  #       - matchExpressions:
+  #         - key: kubernetes.io/hostname
+  #           operator: In
+  #           values:
+  #             - rpi2
 
 ---
 
@@ -32,17 +35,20 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain 
-  storageClassName: local-storage
-  local:
-    path: /srv/data/k8s/transmission
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-          - key: kubernetes.io/hostname
-            operator: In
-            values:
-              - rpi2
+  storageClassName: nfs-data
+  nfs:
+    server: 192.168.1.252
+    path: "/srv/nfs/data/k8s/transmission"
+  # local:
+  #   path: /srv/data/k8s/transmission
+  # nodeAffinity:
+  #   required:
+  #     nodeSelectorTerms:
+  #       - matchExpressions:
+  #         - key: kubernetes.io/hostname
+  #           operator: In
+  #           values:
+  #             - rpi2
 
 --- 
 
@@ -53,7 +59,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: local-storage
+  storageClassName: nfs-data
   volumeName: transmission-downloads
   resources:
     requests:
@@ -68,7 +74,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: local-storage
+  storageClassName: nfs-data
   volumeName: transmission-config
   resources:
     requests:
