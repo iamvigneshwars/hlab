@@ -4,6 +4,8 @@ kube-prometheus-stack:
 
   grafana:
     enabled: true
+    initChownData:
+      enabled: false
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -33,7 +35,7 @@ kube-prometheus-stack:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - rpi2
+                    - rpi1
 
   prometheus:
     enabled: true
@@ -69,7 +71,7 @@ kube-prometheus-stack:
                   - key: kubernetes.io/hostname
                     operator: In
                     values:
-                      - rpi2
+                      - rpi1
 
   kube-state-metrics:
     enabled: true
@@ -88,7 +90,7 @@ kube-prometheus-stack:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - rpi2
+                    - rpi1
 
   prometheusOperator:
     enabled: true
@@ -107,7 +109,7 @@ kube-prometheus-stack:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                    - rpi2
+                    - rpi1
 
   prometheus-node-exporter:
     enabled: true
