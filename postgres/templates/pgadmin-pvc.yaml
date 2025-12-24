@@ -10,15 +10,15 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: manual-pgadmin
   local:
-    path: /srv/nvme/k8s/pgadmin
+    path: /srv/nfs/data/k8s/pgadmin
   nodeAffinity:
     required:
       nodeSelectorTerms:
         - matchExpressions:
-          - key: kubernetes.io/hostname
+          - key: database
             operator: In
             values:
-              - rpi1
+              - "true"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

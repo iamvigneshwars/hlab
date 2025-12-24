@@ -5,7 +5,7 @@ postgresql:
         postgresPassword: "admin"
   primary:
     nodeSelector:
-      kubernetes.io/hostname: rpi1
+      database: "true"
     persistence:
       enabled: true
       existingClaim: "postgres"
@@ -39,15 +39,15 @@ pgadmin4:
           - path: /
             pathType: Prefix
   nodeSelector:
-    kubernetes.io/hostname: rpi1
+    database: "true"
   persistentVolume:
     enabled: true
     existingClaim: "pgadmin"
-  resources:
-    requests:
-      cpu: 250m
-      memory: 512Mi
-    limits:
-      memory: 512Mi
+  # resources:
+  #   requests:
+  #     cpu: 250m
+  #     memory: 512Mi
+  #   limits:
+  #     memory: 512Mi
   volumePermissions:
     enabled: true

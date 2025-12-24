@@ -10,15 +10,15 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: manual-postgres
   local:
-    path: /srv/nvme/k8s/postgres
+    path: /srv/nfs/data/k8s/postgres
   nodeAffinity:
     required:
       nodeSelectorTerms:
         - matchExpressions:
-          - key: kubernetes.io/hostname
+          - key: database
             operator: In
             values:
-              - rpi1
+              - "true"
 
 ---
 
