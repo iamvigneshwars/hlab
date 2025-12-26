@@ -6,7 +6,7 @@ argo-cd:
         name: Keycloak
         issuer: http://keycloak.lan/realms/homelab
         clientID: argocd
-        clientSecret: lFZ0WxB1e3QlLsn6oeaYP51tXi92F39y
+        clientSecret: cRUTsyCNgZMz1tYVDUpIKAQdMIKuTuzA
         usernameClaim: email
         requestedScopes:
           - openid
@@ -30,61 +30,71 @@ argo-cd:
   redis-ha:
     enabled: false
   redis:
-    resources:
-      limits:
-        cpu: 100m
-        memory: 128Mi
-      requests:
-        cpu: 50m
-        memory: 64Mi
+    nodeSelector:
+      kubernetes.io/hostname: rpi1
+    # resources:
+    #   limits:
+    #     cpu: 100m
+    #     memory: 128Mi
+    #   requests:
+    #     cpu: 50m
+    #     memory: 64Mi
 
   controller:
+    nodeSelector:
+      kubernetes.io/hostname: rpi1
     replicas: 1
-    resources:
-      limits:
-        cpu: 300m
-        memory: 512Mi
-      requests:
-        cpu: 100m
-        memory: 256Mi
+    # resources:
+    #   limits:
+    #     cpu: 300m
+    #     memory: 512Mi
+    #   requests:
+    #     cpu: 100m
+    #     memory: 256Mi
 
   server:
+    nodeSelector:
+      kubernetes.io/hostname: rpi1
     replicas: 1
     autoscaling:
       enabled: false
-    resources:
-      limits:
-        cpu: 200m
-        memory: 256Mi
-      requests:
-        cpu: 50m
-        memory: 128Mi
+    # resources:
+    #   limits:
+    #     cpu: 200m
+    #     memory: 256Mi
+    #   requests:
+    #     cpu: 50m
+    #     memory: 128Mi
 
   repoServer:
+    nodeSelector:
+      kubernetes.io/hostname: rpi1
     replicas: 1
-    resources:
-      limits:
-        cpu: 200m
-        memory: 1Gi
-      requests:
-        cpu: 50m
-        memory: 512Mi
+    # resources:
+    #   limits:
+    #     cpu: 200m
+    #     memory: 1Gi
+    #   requests:
+    #     cpu: 50m
+    #     memory: 512Mi
 
   applicationSet:
-    resources:
-      limits:
-        cpu: 100m
-        memory: 128Mi
-      requests:
-        cpu: 50m
-        memory: 64Mi
+    nodeSelector:
+      kubernetes.io/hostname: rpi1
+    # resources:
+    #   limits:
+    #     cpu: 100m
+    #     memory: 128Mi
+    #   requests:
+    #     cpu: 50m
+    #     memory: 64Mi
 
   notifications:
     enabled: false
   dex:
     enabled: false
   crds:
-    install: false
+    install: true
 
   server:
     insecure: true
