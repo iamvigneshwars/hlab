@@ -27,13 +27,13 @@ keycloak:
   postgresql:
     enabled: false
 
-  resources:
-    requests:
-      cpu: 1
-      memory: 750Mi
-    limits:
-      cpu: 1500m
-      memory: 750Mi
+  # resources:
+  #   requests:
+  #     cpu: 1
+  #     memory: 750Mi
+  #   limits:
+  #     cpu: 1500m
+  #     memory: 750Mi
 
   nodeSelector:
     kubernetes.io/hostname: rpi1
@@ -52,7 +52,7 @@ keycloak:
     - name: KC_DB
       value: "postgres"
     - name: KC_DB_URL
-      value: "jdbc:postgresql://postgres.lan:30432/keycloak"
+      value: "jdbc:postgresql://192.168.1.252:30432/keycloak"
     - name: KC_DB_USERNAME
       value: "keycloak"
     - name: KC_DB_PASSWORD
