@@ -30,7 +30,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: transmission 
-          image: linuxserver/transmission:latest 
+          image: linuxserver/transmission:4.0.6
           ports:
             - containerPort: 9091 
             - containerPort: 51413
