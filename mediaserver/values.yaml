@@ -8,6 +8,7 @@ transmission:
     #   memory: "512Mi"
 
 jellyfin:
+  enabled: false
   resources: {}
     # requests:
     #   cpu: "2000m"

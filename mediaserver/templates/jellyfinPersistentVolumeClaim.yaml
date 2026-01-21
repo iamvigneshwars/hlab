@@ -1,3 +1,4 @@
+{{- if .Values.jellyfin.enabled }}
 apiVersion: v1
 kind: PersistentVolume 
 metadata:
@@ -79,3 +80,4 @@ spec:
   resources:
     requests:
       storage: 10Gi
+{{- end }}
