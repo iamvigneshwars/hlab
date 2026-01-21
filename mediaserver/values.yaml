@@ -15,3 +15,5 @@ jellyfin:
     # limits:
     #   cpu: "3500m"
     #   memory: "3000Mi"
+plex:
+  resources: {}
