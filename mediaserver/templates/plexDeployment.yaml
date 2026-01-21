@@ -38,6 +38,8 @@ spec:
               value: "Europe/London"
             - name: PLEX_CLAIM
               value: ""
+            - name: ALLOWED_NETWORKS
+              value: "192.168.1.0/24,10.42.0.0/16,10.43.0.0/16"
           volumeMounts:
             - name: media
               mountPath: /media
