@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adguard-home
+  labels:
+    app: adguard-home
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adguard-home
+  template:
+    metadata:
+      labels:
+        app: adguard-home
+    spec:
+      containers:
+        - name: adguard-home
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - name: setup
+              containerPort: {{ .Values.service.setupPort }}
+              protocol: TCP
+            - name: admin
+              containerPort: {{ .Values.service.adminPort }}
+              protocol: TCP
+            - name: dns-tcp
+              containerPort: {{ .Values.service.dnsPort }}
+              protocol: TCP
+            - name: dns-udp
+              containerPort: {{ .Values.service.dnsPort }}
+              protocol: UDP
+          volumeMounts:
+            - name: adguard-data
+              mountPath: /opt/adguardhome/work
+              subPath: work
+            - name: adguard-data
+              mountPath: /opt/adguardhome/conf
+              subPath: conf
+      volumes:
+        - name: adguard-data
+          persistentVolumeClaim:
+            claimName: adguard-home
