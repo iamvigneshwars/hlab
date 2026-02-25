@@ -5,8 +5,26 @@ ingress-nginx:
       name: nginx
       enabled: true
       default: true
+    extraArgs:
+      default-ssl-certificate: nginx-ingress/visar-cloud-tls
     service:
       type: LoadBalancer
       loadBalancerIP: 192.168.1.240
       annotations:
         metallb.io/address-pool: homelab-pool
+
+cloudflare:
+  apiTokenSecretName: cloudflare-sealedsecret
+  apiTokenSecretKey: api-token
+  encryptedApiToken: "AgBz32IA68TtVcHdms2719e8gcbwF8B89k00988QthsAZ479nSbp3kNzQ8uWxytnCiY0m4UgFkOjMO+1LpjiEpYvBfyheXuGzt0BuI6PBMnwjiJ48Bz5WIZKo/PgiwbZqOBd0/Kd3QRQOVA52XOEvkblltQHtWx210ANn6ZezoMEIggEfxOiixo27eqg7sgSJZMHwlm8RkfuY783r4sP2GtIvfgZRLXcCm1zP0Ng4fppYRW/TY0/HR95wMAWCeY7DXg4ndtsWqoa8sz3ui8JW3FZAmuTzROuCU6eGh+ywMbCMf6zB00a+QZSEuYXqZcMyMm17Br9x1kwAU0LCVd+hk29Pp2Ygpe57ncy8YZVukHvDsaPz7/K27qPrb3ZNSgQeHIbY7zZfz2/Q/v95Sw4gy+C0oXxMZNlF6yJ40kcdoj3i2HsheKKAvjH7/pFS4wDrvEdGk6Wjm/j6k9j8zpbeNpWW/3NDjTs98sWSBuAeLce/h8PA+leYRD8iAcAQ4Q55rQh0mBjg8JVUw/ctW/+dFQVQc6gbDSokcbq6VUGWOqFM5a1Zlegg3QzHe4jL/RWCT0IrDx15uMbWxuHl109Sm/czoePl+3eW4lZqeYjdy7ybuOleIXZ7O0JsaoZQMTqOQITaNgb6OKC7y6gc6aA7G1N6iKA2J+hkUdSa4f0ge0V7lfaFPPvH4zmv+gjAALIait0Vvz4afXxu83I4lJbwIvoh4qgcsJ2zonQMn6z0XwAREppfhbggVQQ"
+
+issuer:
+  name: letsencrypt-cloudflare
+  email: iamvigneshwars@gmail.com
+  server: https://acme-v02.api.letsencrypt.org/directory
+
+certificate:
+  name: visar-cloud
+  namespace: nginx-ingress
+  secretName: visar-cloud-tls
+  domain: visar.cloud
