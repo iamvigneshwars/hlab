@@ -4,14 +4,17 @@ metadata:
   name: transmission
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - transmission.visar.cloud
   rules:
-  - host: transmission.lan
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: transmission
-            port:
-              number: 9091
+    - host: transmission.visar.cloud
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: transmission
+                port:
+                  number: 9091
