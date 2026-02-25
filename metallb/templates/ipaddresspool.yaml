@@ -1,0 +1,10 @@
+{{- if .Capabilities.APIVersions.Has "metallb.io/v1beta1/IPAddressPool" }}
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: {{ .Values.addressPool.name }}
+  namespace: {{ .Values.metallbNamespace }}
+spec:
+  addresses:
+{{- toYaml .Values.addressPool.addresses | nindent 4 }}
+{{- end }}
