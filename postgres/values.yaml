@@ -1,8 +1,6 @@
 postgresql:
-  global:
-    postgresql:
-      auth:
-        postgresPassword: "admin"
+  auth:
+    existingSecret: "postgres-auth"
   primary:
     nodeSelector:
       database: "true"
@@ -18,9 +16,7 @@ postgresql:
         cpu: 1
         memory: 1Gi
     service:
-      type: NodePort
-      nodePorts:
-        postgresql: "30432"
+      type: LoadBalancer
   volumePermissions:
     enabled: true
 
@@ -31,10 +27,8 @@ pgadmin4:
   ingress:
     enabled: true
     ingressClassName: nginx
-    annotations:
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
     hosts:
-      - host: pgadmin.lan
+      - host: pgadmin.visar.cloud
         paths:
           - path: /
             pathType: Prefix
@@ -43,11 +37,5 @@ pgadmin4:
   persistentVolume:
     enabled: true
     existingClaim: "pgadmin"
-  # resources:
-  #   requests:
-  #     cpu: 250m
-  #     memory: 512Mi
-  #   limits:
-  #     memory: 512Mi
   volumePermissions:
     enabled: true
