@@ -1,25 +1,23 @@
 keycloak:
   image:
     repository: quay.io/keycloak/keycloak
-    tag: "26.4.0"
-  #
+    tag: "26.5.4"
+
   command:
     - "/opt/keycloak/bin/kc.sh"
     - "start"
-  #
+
   service:
     type: ClusterIP
-  #
+
   ingress:
     enabled: true
-    servicePort: http
     ingressClassName: nginx
-    annotations:
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    tls:
+      - hosts:
+          - keycloak.visar.cloud
     rules:
-    - host: keycloak.lan
+    - host: keycloak.visar.cloud
       paths:
       - path: /
         pathType: Prefix
@@ -27,20 +25,12 @@ keycloak:
   postgresql:
     enabled: false
 
-  # resources:
-  #   requests:
-  #     cpu: 1
-  #     memory: 750Mi
-  #   limits:
-  #     cpu: 1500m
-  #     memory: 750Mi
-
   nodeSelector:
     kubernetes.io/hostname: rpi1
 
   extraEnv: |
     - name: KC_HOSTNAME
-      value: "keycloak.lan"
+      value: "keycloak.visar.cloud"
     - name: KC_PROXY_HEADERS
       value: "xforwarded"
     - name: KC_HTTP_ENABLED
@@ -48,15 +38,21 @@ keycloak:
     - name: KEYCLOAK_ADMIN
       value: "admin"
     - name: KEYCLOAK_ADMIN_PASSWORD
-      value: "admin"
+      valueFrom:
+        secretKeyRef:
+          name: keycloak-cred
+          key: admin-password
     - name: KC_DB
       value: "postgres"
     - name: KC_DB_URL
-      value: "jdbc:postgresql://192.168.1.252:30432/keycloak"
+      value: "jdbc:postgresql://192.168.1.242:5432/keycloak"
     - name: KC_DB_USERNAME
       value: "keycloak"
     - name: KC_DB_PASSWORD
-      value: "keycloak"
+      valueFrom:
+        secretKeyRef:
+          name: keycloak-cred
+          key: db-password
     - name: KC_HTTP_MANAGEMENT_HEALTH_ENABLED
       value: "false"
     - name: KC_HEALTH_ENABLED
