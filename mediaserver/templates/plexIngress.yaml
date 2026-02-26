@@ -4,8 +4,11 @@ metadata:
   name: plex
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - plex.visar.cloud
   rules:
-    - host: plex.lan
+    - host: plex.visar.cloud
       http:
         paths:
           - path: /

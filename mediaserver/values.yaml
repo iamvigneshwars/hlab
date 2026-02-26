@@ -17,4 +17,6 @@ jellyfin:
     #   cpu: "3500m"
     #   memory: "3000Mi"
 plex:
+  hostNetwork: true
+  dnsPolicy: ClusterFirstWithHostNet
   resources: {}
