@@ -9,10 +9,37 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       ingressClassName: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
       hosts:
-        - grafana.lan
+        - grafana.visar.cloud
       path: /
       pathType: Prefix
+      tls:
+        - hosts:
+            - grafana.visar.cloud
+    envFromSecret: grafana-oidc
+    grafana.ini:
+      server:
+        root_url: https://grafana.visar.cloud
+      auth:
+        oauth_auto_login: true
+        disable_login_form: true
+      auth.generic_oauth:
+        enabled: true
+        name: Keycloak
+        allow_sign_up: true
+        client_id: grafana-oauth
+        client_secret: $__env{CLIENT_SECRET}
+        scopes: openid profile email
+        auth_url: https://keycloak.visar.cloud/realms/homelab/protocol/openid-connect/auth
+        token_url: https://keycloak.visar.cloud/realms/homelab/protocol/openid-connect/token
+        api_url: https://keycloak.visar.cloud/realms/homelab/protocol/openid-connect/userinfo
+        login_attribute_path: preferred_username
+        email_attribute_path: email
+        name_attribute_path: full_name
+        use_refresh_token: true
+        role_attribute_path: contains() && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'
     resources:
       requests:
         cpu: 100m
@@ -42,11 +69,17 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       ingressClassName: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
       hosts:
-        - prometheus.lan
+        - prometheus.visar.cloud
       path: /
       pathType: Prefix
+      tls:
+        - hosts:
+            - prometheus.visar.cloud
     prometheusSpec:
+      externalUrl: https://prometheus.visar.cloud
       storageSpec:
         volumeClaimTemplate:
           spec:
