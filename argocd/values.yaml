@@ -1,12 +1,14 @@
 argo-cd:
   configs:
+    params:
+      server.insecure: "true"
     cm:
-      url: http://argocd.lan
+      url: https://argocd.visar.cloud
       oidc.config: |
         name: Keycloak
-        issuer: http://keycloak.lan/realms/homelab
+        issuer: https://keycloak.visar.cloud/realms/homelab
         clientID: argocd
-        clientSecret: cRUTsyCNgZMz1tYVDUpIKAQdMIKuTuzA
+        clientSecret: $oidc-secret:clientSecret
         usernameClaim: email
         requestedScopes:
           - openid
@@ -25,32 +27,18 @@ argo-cd:
         p, role:admin, logs, get, */*, allow
         p, role:admin, settings, *, *, allow
         g, admin, role:admin
-        g, viki@admin.com, role:admin
+        g, iamvigneshwars@gmail.com, role:admin
 
   redis-ha:
     enabled: false
   redis:
     nodeSelector:
       kubernetes.io/hostname: rpi1
-    # resources:
-    #   limits:
-    #     cpu: 100m
-    #     memory: 128Mi
-    #   requests:
-    #     cpu: 50m
-    #     memory: 64Mi
 
   controller:
     nodeSelector:
       kubernetes.io/hostname: rpi1
     replicas: 1
-    # resources:
-    #   limits:
-    #     cpu: 300m
-    #     memory: 512Mi
-    #   requests:
-    #     cpu: 100m
-    #     memory: 256Mi
 
   server:
     nodeSelector:
@@ -58,36 +46,24 @@ argo-cd:
     replicas: 1
     autoscaling:
       enabled: false
-    # resources:
-    #   limits:
-    #     cpu: 200m
-    #     memory: 256Mi
-    #   requests:
-    #     cpu: 50m
-    #     memory: 128Mi
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+      hostname: argocd.visar.cloud
+      path: /
+      pathType: Prefix
+      ingressClassName: nginx
 
   repoServer:
     nodeSelector:
       kubernetes.io/hostname: rpi1
     replicas: 1
-    # resources:
-    #   limits:
-    #     cpu: 200m
-    #     memory: 1Gi
-    #   requests:
-    #     cpu: 50m
-    #     memory: 512Mi
 
   applicationSet:
     nodeSelector:
       kubernetes.io/hostname: rpi1
-    # resources:
-    #   limits:
-    #     cpu: 100m
-    #     memory: 128Mi
-    #   requests:
-    #     cpu: 50m
-    #     memory: 64Mi
 
   notifications:
     enabled: false
@@ -95,19 +71,3 @@ argo-cd:
     enabled: false
   crds:
     install: true
-
-  server:
-    insecure: true
-    ingress:
-      enabled: true
-      hostname: argocd.lan
-      path: /
-      pathType: Prefix
-      ingressClassName: nginx
-      annotations:
-        nginx.ingress.kubernetes.io/ssl-redirect: "false"
-        nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-
-    extraArgs:
-      - --insecure
