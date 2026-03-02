@@ -1,0 +1,106 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/gethomepage/homepage
+  tag: v1.10.1
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  hosts:
+    - host: homepage.visar.cloud
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - homepage.visar.cloud
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+
+nodeSelector:
+  kubernetes.io/hostname: rpi1
+
+config:
+  kubernetes:
+    mode: cluster
+
+  settings:
+    title: Homelab Dashboard
+    background: "https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    theme: dark
+    color: slate
+    language: en
+
+  widgets:
+    - kubernetes:
+        cluster:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+          label: "cluster"
+        nodes:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+          label: "nodes"
+
+  bookmarks:
+    - GitHub Repos:
+        - Homelab:
+            - href: https://github.com/iamvigneshwars/hlab
+
+  services:
+    - Observability:
+        - Grafana:
+            icon: grafana.png
+            href: https://grafana.visar.cloud
+            description: Metrics and dashboards
+        - Prometheus:
+            icon: prometheus.png
+            href: https://prometheus.visar.cloud
+            description: Metrics backend
+        - Adguard:
+            icon: mdi-shield-home
+            href: http://192.168.1.241
+            description: Network-wide ad blocker
+            widget:
+              type: adguard
+              url: http://192.168.1.241
+              username: admin
+              password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"
+    - Platform:
+        - Argo CD:
+            icon: argo-cd.png
+            href: https://argocd.visar.cloud
+            description: GitOps control plane
+        - Keycloak:
+            icon: keycloak.png
+            href: https://keycloak.visar.cloud
+            description: Identity provider
+        - pgAdmin:
+            icon: pgadmin.png
+            href: https://pgadmin.visar.cloud
+            description: PostgreSQL administration
+
+    - Media:
+        - Transmission:
+            icon: transmission.png
+            href: https://transmission.visar.cloud
+            description: Torrent client
+        - Plex:
+            icon: plex.png
+            href: https://plex.visar.cloud
+            description: Media server

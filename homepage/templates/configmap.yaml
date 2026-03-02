@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-config
+data:
+  kubernetes.yaml: |
+{{ toYaml .Values.config.kubernetes | indent 4 }}
+  settings.yaml: |
+{{ toYaml .Values.config.settings | indent 4 }}
+  widgets.yaml: |
+{{ toYaml .Values.config.widgets | indent 4 }}
+  bookmarks.yaml: |
+{{ toYaml .Values.config.bookmarks | indent 4 }}
+  services.yaml: |
+{{ toYaml .Values.config.services | indent 4 }}
