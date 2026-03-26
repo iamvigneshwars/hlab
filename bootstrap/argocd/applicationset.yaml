@@ -1,0 +1,66 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: homelab
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - name: metallb
+            namespace: metallb-system
+            path: charts/infrastructure/metallb
+            wave: "-20"
+          - name: postgresql
+            namespace: postgres
+            path: charts/data/postgresql
+            wave: "-10"
+          - name: cert-manager
+            namespace: cert-manager
+            path: charts/infrastructure/cert-manager
+            wave: "-10"
+          - name: ingress-nginx
+            namespace: nginx-ingress
+            path: charts/infrastructure/ingress-nginx
+            wave: "0"
+          - name: adguard-home
+            namespace: adguard-home
+            path: charts/apps/adguard-home
+            wave: "10"
+          - name: keycloak
+            namespace: keycloak
+            path: charts/platform/keycloak
+            wave: "10"
+          - name: monitoring
+            namespace: monitoring
+            path: charts/platform/monitoring
+            wave: "20"
+          - name: homepage
+            namespace: homepage
+            path: charts/apps/homepage
+            wave: "30"
+          - name: media-server
+            namespace: mediaserver
+            path: charts/apps/media-server
+            wave: "30"
+  template:
+    metadata:
+      name: "{{name}}"
+      annotations:
+        argocd.argoproj.io/sync-wave: "{{wave}}"
+    spec:
+      project: homelab
+      source:
+        repoURL: https://github.com/iamvigneshwars/hlab.git
+        targetRevision: HEAD
+        path: "{{path}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{namespace}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
