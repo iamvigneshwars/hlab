@@ -1,0 +1,29 @@
+ingress-nginx:
+  controller:
+    ingressClass: nginx
+    ingressClassResource:
+      name: nginx
+      enabled: true
+      default: true
+    extraArgs:
+      default-ssl-certificate: nginx-ingress/visar-cloud-tls
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 192.168.1.240
+      annotations:
+        metallb.io/address-pool: homelab-pool
+
+cloudflare:
+  apiTokenSecretName: cloudflare-sealedsecret
+  apiTokenSecretKey: api-token
+
+issuer:
+  name: letsencrypt-cloudflare
+  email: iamvigneshwars@gmail.com
+  server: https://acme-v02.api.letsencrypt.org/directory
+
+certificate:
+  name: visar-cloud
+  namespace: nginx-ingress
+  secretName: visar-cloud-tls
+  domain: visar.cloud

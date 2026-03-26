@@ -1,6 +1,6 @@
 image:
   repository: adguard/adguardhome
-  tag: 0.107.72
+  tag: v0.107.72
 
 service:
   type: LoadBalancer
