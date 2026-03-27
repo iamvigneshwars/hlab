@@ -1,0 +1,65 @@
+version: 2
+updates:
+  - package-ecosystem: "helm"
+    directory: "/charts/data/postgresql"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "helm"
+
+  - package-ecosystem: "helm"
+    directory: "/charts/infrastructure/cert-manager"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "helm"
+
+  - package-ecosystem: "helm"
+    directory: "/charts/infrastructure/ingress-nginx"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "helm"
+
+  - package-ecosystem: "helm"
+    directory: "/charts/infrastructure/metallb"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "helm"
+
+  - package-ecosystem: "helm"
+    directory: "/charts/infrastructure/sealed-secrets"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "helm"
+
+  - package-ecosystem: "helm"
+    directory: "/charts/platform/argocd"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "helm"
+
+  - package-ecosystem: "helm"
+    directory: "/charts/platform/keycloak"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "helm"
+
+  - package-ecosystem: "helm"
+    directory: "/charts/platform/monitoring"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "helm"
