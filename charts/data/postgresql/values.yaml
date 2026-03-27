@@ -22,6 +22,7 @@ postgresql:
 
 pgadmin4:
   env:
+    # Bootstrap-only default
     email: "admin@admin.com"
     password: "admin"
   ingress:

@@ -53,6 +53,7 @@ kube-prometheus-stack:
       accessModes:
         - ReadWriteOnce
       size: 5Gi
+    # Bootstrap-only default
     adminPassword: admin
     affinity:
       nodeAffinity:
