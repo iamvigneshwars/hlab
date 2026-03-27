@@ -12,6 +12,15 @@ ingress-nginx:
       loadBalancerIP: 192.168.1.240
       annotations:
         metallb.io/address-pool: homelab-pool
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: controlplane
+                  operator: In
+                  values:
+                    - "true"
 
 cloudflare:
   apiTokenSecretName: cloudflare-sealedsecret

@@ -1,2 +1,12 @@
 cert-manager:
   installCRDs: true
+
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: controlplane
+                operator: In
+                values:
+                  - "true"
