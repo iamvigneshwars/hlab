@@ -4,6 +4,10 @@ GitOps repo for my home lab.
 
 It runs on a 3-node Raspberry Pi 5 k3s cluster and is used for self-hosting, testing, and learning Kubernetes/cloud-native tooling.
 
+<p align="center">
+  <img src="./cluster.gif" alt="Cluster">
+</p>
+
 ## What is here
 
 - `bootstrap/argocd`: Argo CD bootstrap manifests
