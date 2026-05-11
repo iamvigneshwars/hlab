@@ -11,9 +11,9 @@ spec:
             namespace: metallb-system
             path: charts/infrastructure/metallb
             wave: "-20"
-          - name: postgresql
-            namespace: postgres
-            path: charts/data/postgresql
+          - name: adguard-home
+            namespace: adguard-home
+            path: charts/apps/adguard-home
             wave: "-10"
           - name: cert-manager
             namespace: cert-manager
@@ -23,26 +23,26 @@ spec:
             namespace: nginx-ingress
             path: charts/infrastructure/ingress-nginx
             wave: "0"
-          - name: adguard-home
-            namespace: adguard-home
-            path: charts/apps/adguard-home
+          - name: postgresql
+            namespace: postgres
+            path: charts/data/postgresql
             wave: "10"
           - name: keycloak
             namespace: keycloak
             path: charts/platform/keycloak
-            wave: "10"
+            wave: "20"
           - name: monitoring
             namespace: monitoring
             path: charts/platform/monitoring
-            wave: "20"
-          - name: homepage
-            namespace: homepage
-            path: charts/apps/homepage
             wave: "30"
           - name: media-server
             namespace: mediaserver
             path: charts/apps/media-server
-            wave: "30"
+            wave: "40"
+          - name: homepage
+            namespace: homepage
+            path: charts/apps/homepage
+            wave: "40"
   template:
     metadata:
       name: "{{name}}"
