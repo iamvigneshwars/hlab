@@ -3,7 +3,6 @@ image:
   tag: v0.107.74
 
 service:
-  type: LoadBalancer
   setupPort: 3000
   adminPort: 80
   dnsPort: 53
