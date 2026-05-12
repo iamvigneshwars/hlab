@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ .Values.certificate.name }}
-  namespace: {{ .Values.certificate.namespace }}
+  name: visar-cloud
+  namespace: nginx-ingress
 spec:
-  secretName: {{ .Values.certificate.secretName }}
+  secretName: visar-cloud-tls
   issuerRef:
-    name: {{ .Values.issuer.name }}
+    name: letsencrypt-cloudflare
     kind: ClusterIssuer
   dnsNames:
-    - {{ .Values.certificate.domain | quote }}
-    - {{ printf "*.%s" .Values.certificate.domain | quote }}
+    - "visar.cloud"
+    - "*.visar.cloud"

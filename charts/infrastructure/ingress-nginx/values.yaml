@@ -17,22 +17,8 @@ ingress-nginx:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: controlplane
+                - key: node-role.kubernetes.io/control-plane
                   operator: In
                   values:
                     - "true"
 
-cloudflare:
-  apiTokenSecretName: cloudflare-api-token
-  apiTokenSecretKey: api-token
-
-issuer:
-  name: letsencrypt-cloudflare
-  email: iamvigneshwars@gmail.com
-  server: https://acme-v02.api.letsencrypt.org/directory
-
-certificate:
-  name: visar-cloud
-  namespace: nginx-ingress
-  secretName: visar-cloud-tls
-  domain: visar.cloud
