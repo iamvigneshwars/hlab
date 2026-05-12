@@ -7,4 +7,3 @@ service:
   setupPort: 3000
   adminPort: 80
   dnsPort: 53
-
