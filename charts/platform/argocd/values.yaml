@@ -3,6 +3,7 @@ argo-cd:
     params:
       server.insecure: "true"
     cm:
+      admin.enabled: "true"
       url: https://argocd.visar.cloud
       oidc.config: |
         name: Keycloak

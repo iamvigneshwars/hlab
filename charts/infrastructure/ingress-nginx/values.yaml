@@ -23,7 +23,7 @@ ingress-nginx:
                     - "true"
 
 cloudflare:
-  apiTokenSecretName: cloudflare-sealedsecret
+  apiTokenSecretName: cloudflare-api-token
   apiTokenSecretKey: api-token
 
 issuer:
