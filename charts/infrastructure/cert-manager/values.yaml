@@ -6,7 +6,7 @@ cert-manager:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
           - matchExpressions:
-              - key: controlplane
+              - key: node-role.kubernetes.io/control-plane
                 operator: In
                 values:
                   - "true"
