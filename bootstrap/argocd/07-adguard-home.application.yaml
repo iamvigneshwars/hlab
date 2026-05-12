@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: adguard-home
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "40"
+spec:
+  project: homelab
+  source:
+    repoURL: https://github.com/iamvigneshwars/hlab.git
+    targetRevision: HEAD
+    path: charts/apps/adguard-home
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: adguard-home
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
