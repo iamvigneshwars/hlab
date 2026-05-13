@@ -29,8 +29,8 @@ spec:
             - name: HOMEPAGE_VAR_ADGUARD_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: services-key
-                  key: adguardPassword
+                  name: adguard
+                  key: password
           volumeMounts:
             - name: config
               mountPath: /app/config/kubernetes.yaml
