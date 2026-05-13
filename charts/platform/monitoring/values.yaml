@@ -42,11 +42,11 @@ kube-prometheus-stack:
         role_attribute_path: contains() && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'
     resources:
       requests:
-        cpu: 100m
-        memory: 128Mi
-      limits:
         cpu: 200m
-        memory: 256Mi
+        memory: 512Mi
+      limits:
+        cpu: 500m
+        memory: 1Gi
     persistence:
       enabled: true
       storageClassName: nfs-grafana
@@ -89,13 +89,13 @@ kube-prometheus-stack:
             resources:
               requests:
                 storage: 10Gi
-      resources:
-        requests:
-          cpu: 200m
-          memory: 400Mi
-        limits:
-          cpu: 500m
-          memory: 1Gi
+      # resources:
+      #   requests:
+      #     cpu: 200m
+      #     memory: 400Mi
+      #   limits:
+      #     cpu: 500m
+      #     memory: 1Gi
       retention: 3d
       affinity:
         nodeAffinity:
@@ -109,13 +109,13 @@ kube-prometheus-stack:
 
   kube-state-metrics:
     enabled: true
-    resources:
-      requests:
-        cpu: 50m
-        memory: 250Mi
-      limits:
-        cpu: 100m
-        memory: 500Mi
+    # resources:
+    #   requests:
+    #     cpu: 50m
+    #     memory: 250Mi
+    #   limits:
+    #     cpu: 100m
+    #     memory: 500Mi
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -128,13 +128,13 @@ kube-prometheus-stack:
 
   prometheusOperator:
     enabled: true
-    resources:
-      requests:
-        cpu: 100m
-        memory: 100Mi
-      limits:
-        cpu: 200m
-        memory: 200Mi
+    # resources:
+    #   requests:
+    #     cpu: 100m
+    #     memory: 100Mi
+    #   limits:
+    #     cpu: 200m
+    #     memory: 200Mi
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -155,10 +155,10 @@ kube-prometheus-stack:
           - sourceLabels: [__meta_kubernetes_pod_node_name]
             targetLabel: node
         metricRelabelings: []
-    resources:
-      requests:
-        cpu: 50m
-        memory: 100Mi
-      limits:
-        cpu: 100m
-        memory: 200Mi
+    # resources:
+    #   requests:
+    #     cpu: 50m
+    #     memory: 100Mi
+    #   limits:
+    #     cpu: 100m
+    #     memory: 200Mi
