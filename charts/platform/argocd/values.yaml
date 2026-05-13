@@ -9,7 +9,7 @@ argo-cd:
         name: Keycloak
         issuer: https://keycloak.visar.cloud/realms/homelab
         clientID: argocd
-        clientSecret: $oidc-secret:clientSecret
+        clientSecret: $argocd-oidc:clientSecret
         usernameClaim: email
         requestedScopes:
           - openid
