@@ -1,4 +1,28 @@
 headlamp:
+  config:
+    oidc:
+      secret:
+        create: false
+      externalSecret:
+        enabled: true
+        name: headlamp-oidc
+      useCookie: true
+      usePKCE: true
+
+  env:
+    - name: OIDC_CLIENT_ID
+      value: headlamp
+    - name: OIDC_CLIENT_SECRET
+      value: "$(client_secret)"
+    - name: OIDC_ISSUER_URL
+      value: https://keycloak.visar.cloud/realms/homelab
+    - name: OIDC_SCOPES
+      value: "profile,email,roles"
+    - name: OIDC_CALLBACK_URL
+      value: https://headlamp.visar.cloud/oidc-callback
+    - name: OIDC_USE_PKCE
+      value: "true"
+
   ingress:
     enabled: true
     ingressClassName: nginx
