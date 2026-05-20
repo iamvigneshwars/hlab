@@ -6,7 +6,7 @@ headlamp:
       - host: headlamp.visar.cloud
         paths:
           - path: /
-            pathType: Prefix
+            type: Prefix
     tls:
       - hosts:
           - headlamp.visar.cloud
