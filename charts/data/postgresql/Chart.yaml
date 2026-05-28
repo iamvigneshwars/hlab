@@ -9,5 +9,5 @@ dependencies:
     version: 18.6.7
     repository: https://charts.bitnami.com/bitnami
   - name: pgadmin4
-    version: 1.62.0
+    version: 1.64.0
     repository: https://helm.runix.net
