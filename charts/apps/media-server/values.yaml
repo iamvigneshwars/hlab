@@ -29,5 +29,6 @@ jellyfin:
     #   memory: "3000Mi"
 plex:
   hostNetwork: true
+  image: linuxserver/plex:1.43.2
   dnsPolicy: ClusterFirstWithHostNet
   resources: {}
