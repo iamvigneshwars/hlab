@@ -1,0 +1,6 @@
+dependencies:
+- name: transmission
+  repository: oci://ghcr.io/lexfrei/charts
+  version: 1.7.3
+digest: sha256:303b3d576ae3c959bdb5cb40cd6af5f4be1f951c3031cac268cd2bc95a4c51bc
+generated: "2026-06-16T21:08:39.943755+01:00"

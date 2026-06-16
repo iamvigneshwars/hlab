@@ -1,11 +1,22 @@
 transmission:
   resources: {}
-    # requests:
-    #   cpu: "100m"
-    #   memory: "256Mi"
-    # limits:
-    #   cpu: "200m"
-    #   memory: "512Mi"
+  persistence:
+    config:
+      existingClaim: transmission-config
+    downloads:
+      type: pvc
+      existingClaim: transmission-downloads
+  ingress:
+    enabled: true
+    className: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    hosts:
+      - host: transmission.visar.cloud
+        paths:
+          - path: /
+            pathType: Prefix
+    tls: []
 
 jellyfin:
   enabled: false
