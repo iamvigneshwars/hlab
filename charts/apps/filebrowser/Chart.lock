@@ -1,0 +1,6 @@
+dependencies:
+- name: Filebrowser
+  repository: https://brandan-schmitz.github.io/helm-charts
+  version: 1.3.1
+digest: sha256:cbfa7d4ff2e1e0f6fd7d21544cf11ad30d5218d6379429a0b2cdb713d819e00f
+generated: "2026-06-30T16:45:09.254317+01:00"

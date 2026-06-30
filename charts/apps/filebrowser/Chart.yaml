@@ -1,0 +1,11 @@
+apiVersion: v2
+name: filebrowser
+description: Helm chart for File Browser
+type: application
+version: 0.1.0
+appVersion: "latest"
+
+dependencies:
+  - name: Filebrowser
+    version: 1.3.1
+    repository: https://brandan-schmitz.github.io/helm-charts
