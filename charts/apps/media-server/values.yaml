@@ -1,4 +1,20 @@
 transmission:
+  # Allow slow startup and brief NFS/HTTP stalls without a restart loop.
+  startupProbe:
+    httpGet:
+      path: /transmission/web/
+      port: http
+    periodSeconds: 10
+    timeoutSeconds: 10
+    failureThreshold: 30
+  livenessProbe:
+    httpTimeoutSeconds: 15
+    timeoutSeconds: 20
+    periodSeconds: 20
+    failureThreshold: 6
+  readinessProbe:
+    timeoutSeconds: 10
+    periodSeconds: 10
   resources: { limits: { cpu: "750m", memory: "512Mi" } }
   persistence:
     config:
