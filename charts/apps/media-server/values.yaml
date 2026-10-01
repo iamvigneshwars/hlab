@@ -1,5 +1,5 @@
 transmission:
-  resources: {}
+  resources: { limits: { cpu: "750m", memory: "512Mi" } }
   persistence:
     config:
       existingClaim: transmission-config
