@@ -6,8 +6,8 @@ version: 0.1.0
 
 dependencies:
   - name: postgresql
-    version: 18.8.7
+    version: 18.9.0
     repository: https://charts.bitnami.com/bitnami
   - name: pgadmin4
-    version: 1.65.0
+    version: 1.66.0
     repository: https://helm.runix.net
